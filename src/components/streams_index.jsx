@@ -1,5 +1,6 @@
 import React from 'react';
 import config from '../config';
+import StreamsIndexItem from './streams_index_item';
 
 import axios from 'axios';
 
@@ -19,7 +20,7 @@ class StreamsIndex extends React.Component {
     const clientId = config.clientId;
     axios.get(twitchApi + clientId)
          .then(response => {
-           console.log(response);
+           this.setState({ streams: response.data.featured });
          })
          .catch(error => {
            console.log("error", error);
@@ -36,7 +37,16 @@ class StreamsIndex extends React.Component {
     } else {
       return (
         <div className="streams-index">
-          <h3>Streams</h3>
+          <table>
+            <tr>
+              <th>Preview:</th>
+              <th>Stream:</th>
+              <th>Currently Stream:</th>
+            </tr>
+            {streams.map( (stream, idx) => (
+              <StreamsIndexItem key={idx} stream={stream} />
+            ))}
+          </table>
         </div>
       );
     }
