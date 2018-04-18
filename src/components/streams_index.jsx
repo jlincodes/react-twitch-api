@@ -37,15 +37,18 @@ class StreamsIndex extends React.Component {
     } else {
       return (
         <div className="streams-index">
+          <h2>Featured Streams</h2>
           <table>
-            <tr>
-              <th>Preview:</th>
-              <th>Stream:</th>
-              <th>Currently Stream:</th>
-            </tr>
-            {streams.map( (stream, idx) => (
-              <StreamsIndexItem key={idx} stream={stream} />
-            ))}
+            <tbody>
+              <tr>
+                <th>Preview:</th>
+                <th>Stream:</th>
+                <th>Currently Stream:</th>
+              </tr>
+              {streams.map( (stream, idx) => (
+                <StreamsIndexItem key={idx} stream={stream} />
+              ))}
+            </tbody>
           </table>
         </div>
       );
