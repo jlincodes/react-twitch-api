@@ -1,11 +1,29 @@
 import React from 'react';
+import config from '../config';
 
-// import axios from 'axios';
+import axios from 'axios';
 
 class StreamsIndex extends React.Component {
   constructor() {
     super();
     this.state = { streams: [] };
+    this.fetchStreams = this.fetchStreams.bind(this);
+  }
+
+  componentWillMount() {
+    this.fetchStreams();
+  }
+
+  fetchStreams() {
+    const twitchApi = 'https://api.twitch.tv/kraken/streams/featured?&client_id=';
+    const clientId = config.clientId;
+    axios.get(twitchApi + clientId)
+         .then(response => {
+           console.log(response);
+         })
+         .catch(error => {
+           console.log("error", error);
+         });
   }
 
   render() {
